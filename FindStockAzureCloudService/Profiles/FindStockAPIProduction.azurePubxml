@@ -19,5 +19,6 @@
     <AzureStorageAccountName>findstockapi</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
     <EnableApplicationInsights>True</EnableApplicationInsights>
+    <AzureHostedServiceResourceGroup />
   </PropertyGroup>
 </Project>

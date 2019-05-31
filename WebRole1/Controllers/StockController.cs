@@ -1,15 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebRole1.Helper;
 
 namespace WebRole1.Controllers
 {
     public class StockController : ApiController
     {
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // | Config                                                          |
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        private static string DatabaseServer = ConfigurationManager.AppSettings["DatabaseServer"];
+        private static string Database = ConfigurationManager.AppSettings["Database"];
+        private static string Username = ConfigurationManager.AppSettings["DatabaseUsername"];
+        private static string Password = ConfigurationManager.AppSettings["DatabasePassword"];
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // | Model                                                           |
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         private class Stock
         {
 
@@ -22,8 +34,8 @@ namespace WebRole1.Controllers
             public string Industry { get; set; }
             public string Sector { get; set; }
             public string Website { get; set; }
-            public string SET50 { get; set; }
-            public string SET100 { get; set; }
+            public bool SET50 { get; set; }
+            public bool SET100 { get; set; }
             public string Market_cap { get; set; }
             public string First_trade_date { get; set; }
             public string Return_rate { get; set; }
@@ -41,42 +53,39 @@ namespace WebRole1.Controllers
             public string Score { get; set; }
             public string LastUpdate { get; set; }
         }
-        // GET api/values
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // | GET api/stock                                                   |
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         public dynamic Get()
         {
-            string sql = "";
-            string connetionString;
-            SqlConnection cnn;
-            connetionString = @"Data Source=ekkawitl.database.windows.net;Initial Catalog=Application;User ID=ekkawitl;Password=Ekk68864";
-            cnn = new SqlConnection(connetionString);
-            cnn.Open();
+            var getDB = new GetDatebaseHelper();
+            string sql = $"SELECT * FROM dbo.stock ORDER BY Score DESC";
 
-            sql = $"SELECT * FROM dbo.stock";
+            return getDB.GetStock(sql);
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // | GET api/stock/fast                                              |
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        [HttpGet]
+        [Route("api/stockfast")]
+        public dynamic GetFast()
+        {
+            var getDB = new GetDatebaseHelper();
+            string sql = $"SELECT TOP (10) * FROM dbo.stock ORDER BY Score DESC";
 
-            SqlCommand command = new SqlCommand(sql, cnn);
-            command.Parameters.AddWithValue("@zip", "india");
+            return getDB.GetStock(sql);
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // | GET api/stock/fast                                              |
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        [HttpGet]
+        [Route("api/stock/{symbol}")]
+        public dynamic GetBySymbol(string symbol)
+        {
+            var getDB = new GetDatebaseHelper();
+            string sql = $"SELECT * FROM dbo.stock WHERE Symbol = '{symbol}'";
 
-            List<Stock> item = new List<Stock>();
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    var tmp = new Stock();
-                    foreach (var propertyInfo in tmp.GetType().GetProperties())
-                    {
-                        var key = propertyInfo.Name;
-                        var prop = tmp.GetType().GetProperty(key);
-                        prop.SetValue(tmp, String.Format("{0}", reader[key]), null);
-                    }
-                    item.Add(tmp);
-                }
-            }
-
-            cnn.Close();
-
-
-            return item;
+            return getDB.GetStock(sql, true);
         }
     }
 }
