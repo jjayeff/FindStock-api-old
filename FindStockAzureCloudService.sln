@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "FindStockAzureCloudService", "FindStockAzureCloudService\FindStockAzureCloudService.ccproj", "{59B623A3-9613-4462-A015-5DA153B37F74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRole1", "WebRole1\WebRole1.csproj", "{3713567D-C393-48BF-85CB-C15F32A731A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59B623A3-9613-4462-A015-5DA153B37F74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59B623A3-9613-4462-A015-5DA153B37F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59B623A3-9613-4462-A015-5DA153B37F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59B623A3-9613-4462-A015-5DA153B37F74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3713567D-C393-48BF-85CB-C15F32A731A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3713567D-C393-48BF-85CB-C15F32A731A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3713567D-C393-48BF-85CB-C15F32A731A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3713567D-C393-48BF-85CB-C15F32A731A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {872D6167-40ED-461D-A084-96BBCD002B90}
+	EndGlobalSection
+EndGlobal

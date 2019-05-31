@@ -1,0 +1,15 @@
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Emulator config file set to D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] DiagnosticsStoreRootPath set to: C:\Users\ekkaw\AppData\Local\dftmp\Resources\25028c65-f35e-4b24-bb1e-c1c1870a5bd1
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Loading config file: D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Config file to read: D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Checking VM Type
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Emulator config file set to D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Extension set to Emulator Mode
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Reading XML configuration file
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Bypassing private config decryption
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Stopping the running plugin, if any
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] No DiagnosticsPlugin is running.
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Killing any DiagnosticsPlugin that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Killing any MonAgentHost that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Diagnostics plugin stopped successfully
+DiagnosticsPluginLauncher.exe Information: 0 : [30/5/2562 23:54:01] Resetting DiagnosticPlugin
