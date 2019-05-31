@@ -163,13 +163,13 @@ namespace WebRole1.Helper
                     sql = $"SELECT * FROM dbo.stock_dividend WHERE Symbol = '{tmp.Symbol}'";
                     tmp.StockDividend = SeleteDB<StockDividend>(sql);
 
-                    DateTime dt = new DateTime(Convert.ToInt32(DateTime.Now.ToString("yyyy")), 1, 1);
+                    DateTime dt = new DateTime(Convert.ToInt32(DateTime.Now.ToString("yyyy")) - 543 * 2, 1, 1);
                     DateTime newDt = dt.AddYears(-4);
+                    var finance = new Finance();
 
                     //--- When Get all data
-                    if (!single)
+                    if (single)
                     {
-                        var finance = new Finance();
                         //--- Get finance_info_yearly table
                         sql = $"SELECT * FROM dbo.finance_info_yearly WHERE Symbol = '{tmp.Symbol}' AND Date >= '{newDt.ToString("yyyy-MM-dd HH:mm:ss")}'";
                         finance.FinanceInfoYearly = SeleteArrayDB<FinanceInfo>(sql);
@@ -179,14 +179,15 @@ namespace WebRole1.Helper
                         //--- Get finance_info_quarter table
                         sql = $"SELECT * FROM dbo.finance_info_quarter WHERE Symbol = '{tmp.Symbol}' AND Date IN (SELECT max(Date) FROM dbo.finance_info_quarter WHERE Symbol = '{tmp.Symbol}')";
                         finance.FinanceInfoQuarter = SeleteDB<FinanceInfo>(sql);
-                        //--- Get finance_stat_daily table
-                        sql = $"SELECT * FROM dbo.finance_stat_daily WHERE Symbol = '{tmp.Symbol}' AND Date IN (SELECT max(Date) FROM dbo.finance_stat_daily WHERE Symbol = '{tmp.Symbol}')";
-                        finance.FinanceStatDaily = SeleteDB<FinanceStat>(sql);
-                        tmp.Finance = finance;
                         //--- Get finance_stat_daily history table
                         sql = $"SELECT * FROM dbo.finance_stat_daily WHERE Symbol = '{tmp.Symbol}' AND Date >= '{dt.ToString("yyyy-MM-dd HH:mm:ss")}' ORDER BY Date DESC";
                         tmp.HistoryFinanceStat = SeleteArrayDB<FinanceStat>(sql);
                     }
+
+                    //--- Get finance_stat_daily table
+                    sql = $"SELECT * FROM dbo.finance_stat_daily WHERE Symbol = '{tmp.Symbol}' AND Date IN (SELECT max(Date) FROM dbo.finance_stat_daily WHERE Symbol = '{tmp.Symbol}')";
+                    finance.FinanceStatDaily = SeleteDB<FinanceStat>(sql);
+                    tmp.Finance = finance;
 
                     item.Add(tmp);
 
