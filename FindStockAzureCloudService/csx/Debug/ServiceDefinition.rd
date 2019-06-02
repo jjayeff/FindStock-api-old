@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FindStockAzureCloudService" generation="1" functional="0" release="0" Id="4426a7ca-bb0f-4142-ba4f-355df9a21c63" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="FindStockAzureCloudService" generation="1" functional="0" release="0" Id="9d3cabc9-ee17-4c01-a0d6-6800e7ad339e" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="FindStockAzureCloudServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -81,9 +81,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="9cfcb115-94b3-48a7-a293-51444eef7e5d" ref="Microsoft.RedDog.Contract\ServiceContract\FindStockAzureCloudServiceContract@ServiceDefinition">
+    <implementation Id="0a42af8b-4e82-42cd-b5a8-dfeb9570e2ff" ref="Microsoft.RedDog.Contract\ServiceContract\FindStockAzureCloudServiceContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="c437e4f0-2607-483f-8bad-294b7252d9fb" ref="Microsoft.RedDog.Contract\Interface\WebRole1:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="a064bb45-5fd8-414f-8dc2-d3c3df6f5d39" ref="Microsoft.RedDog.Contract\Interface\WebRole1:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/FindStockAzureCloudService/FindStockAzureCloudServiceGroup/WebRole1:Endpoint1" />
           </inPort>

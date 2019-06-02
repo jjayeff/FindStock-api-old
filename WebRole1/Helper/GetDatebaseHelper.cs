@@ -28,16 +28,16 @@ namespace WebRole1.Helper
             public string Date { get; set; }
             public string Year { get; set; }
             public string Quarter { get; set; }
-            public string Assets { get; set; }
-            public string Liabilities { get; set; }
-            public string Equity { get; set; }
-            public string Paid_up_cap { get; set; }
-            public string Revenue { get; set; }
-            public string NetProfit { get; set; }
-            public string EPS { get; set; }
-            public string ROA { get; set; }
-            public string ROE { get; set; }
-            public string NetProfitMargin { get; set; }
+            public double Assets { get; set; }
+            public double Liabilities { get; set; }
+            public double Equity { get; set; }
+            public double Paid_up_cap { get; set; }
+            public double Revenue { get; set; }
+            public double NetProfit { get; set; }
+            public double EPS { get; set; }
+            public double ROA { get; set; }
+            public double ROE { get; set; }
+            public double NetProfitMargin { get; set; }
             public string LastUpdate { get; set; }
         }
         public class FinanceStat
@@ -48,13 +48,13 @@ namespace WebRole1.Helper
             // Properties.
             public string Date { get; set; }
             public string Year { get; set; }
-            public string Lastprice { get; set; }
-            public string Market_cap { get; set; }
+            public double Lastprice { get; set; }
+            public double Market_cap { get; set; }
             public string FS_date { get; set; }
-            public string PE { get; set; }
-            public string PBV { get; set; }
-            public string BookValue_Share { get; set; }
-            public string Dvd_Yield { get; set; }
+            public double PE { get; set; }
+            public double PBV { get; set; }
+            public double BookValue_Share { get; set; }
+            public double Dvd_Yield { get; set; }
             public string LastUpdate { get; set; }
         }
         public class Finance
@@ -70,9 +70,9 @@ namespace WebRole1.Helper
             public GrowthStock() { }
 
             // Properties.
-            public string Net_rate { get; set; }
-            public string Assets_rate { get; set; }
-            public string Price_rate { get; set; }
+            public double Net_rate { get; set; }
+            public double Assets_rate { get; set; }
+            public double Price_rate { get; set; }
         }
         public class StockDividend
         {
@@ -80,9 +80,9 @@ namespace WebRole1.Helper
             public StockDividend() { }
 
             // Properties.
-            public string DIv_rate { get; set; }
-            public string More_one_rate { get; set; }
-            public string Double_rate { get; set; }
+            public double DIv_rate { get; set; }
+            public double More_one_rate { get; set; }
+            public double Double_rate { get; set; }
         }
         public class Stock
         {
@@ -98,21 +98,21 @@ namespace WebRole1.Helper
             public string Website { get; set; }
             public bool SET50 { get; set; }
             public bool SET100 { get; set; }
-            public string Market_cap { get; set; }
+            public double Market_cap { get; set; }
             public string First_trade_date { get; set; }
-            public string Return_rate { get; set; }
-            public string Price_rate { get; set; }
-            public string IAA_rate { get; set; }
-            public string Growth_stock_rate { get; set; }
-            public string Stock_dividend_rate { get; set; }
-            public string SET50_rate { get; set; }
-            public string SET100_rate { get; set; }
-            public string PE_rate { get; set; }
-            public string PBV_rate { get; set; }
-            public string ROE_rate { get; set; }
-            public string ROA_rate { get; set; }
-            public string Market_cap_rate { get; set; }
-            public string Score { get; set; }
+            public double Return_rate { get; set; }
+            public double Price_rate { get; set; }
+            public double IAA_rate { get; set; }
+            public double Growth_stock_rate { get; set; }
+            public double Stock_dividend_rate { get; set; }
+            public double SET50_rate { get; set; }
+            public double SET100_rate { get; set; }
+            public double PE_rate { get; set; }
+            public double PBV_rate { get; set; }
+            public double ROE_rate { get; set; }
+            public double ROA_rate { get; set; }
+            public double Market_cap_rate { get; set; }
+            public double Score { get; set; }
             public GrowthStock GrowthStock { get; set; }
             public StockDividend StockDividend { get; set; }
             public Finance Finance { get; set; }
@@ -145,9 +145,30 @@ namespace WebRole1.Helper
                         var key = propertyInfo.Name;
                         var prop = tmp.GetType().GetProperty(key);
                         if (key != "StockDividend" && key != "GrowthStock" && key != "Finance" && key != "HistoryFinanceStat")
-                            if (key == "SET50" || key == "SET100")
+                            if (propertyInfo.PropertyType == typeof(System.Boolean))
                             {
                                 var value = Convert.ToBoolean(String.Format("{0}", reader[key]));
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (propertyInfo.PropertyType == typeof(System.Double))
+                            {
+                                var value = Convert.ToDouble(String.Format("{0}", reader[key]));
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (key == "LastUpdate" || key == "Date" || key == "FS_date")
+                            {
+                                var value = ChangeDateFormat(String.Format("{0}", reader[key]));
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (key == "First_trade_date")
+                            {
+                                var value = ChangeDateFormat1(String.Format("{0}", reader[key]));
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (key == "Year")
+                            {
+
+                                var value = ChangeYearFormat(String.Format("{0}", reader[key]));
                                 prop.SetValue(tmp, value);
                             }
                             else
@@ -221,7 +242,37 @@ namespace WebRole1.Helper
                     {
                         var key = propertyInfo.Name;
                         var prop = tmp.GetType().GetProperty(key);
-                        prop.SetValue(tmp, String.Format("{0}", reader[key]), null);
+                        if (propertyInfo.PropertyType == typeof(System.Boolean))
+                        {
+                            var value = Convert.ToBoolean(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else if (propertyInfo.PropertyType == typeof(System.Double))
+                        {
+                            var value = Convert.ToDouble(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else if (key == "LastUpdate" || key == "Date" || key == "FS_date")
+                        {
+                            var value = ChangeDateFormat(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else if (key == "First_trade_date")
+                        {
+                            var value = ChangeDateFormat1(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else if (key == "Year")
+                        {
+
+                            var value = ChangeYearFormat(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else
+                        {
+                            var value = String.Format("{0}", reader[key]);
+                            prop.SetValue(tmp, value == "" ? null : value);
+                        }
                     }
                     item = tmp;
                 }
@@ -252,7 +303,37 @@ namespace WebRole1.Helper
                     {
                         var key = propertyInfo.Name;
                         var prop = tmp.GetType().GetProperty(key);
-                        prop.SetValue(tmp, String.Format("{0}", reader[key]), null);
+                        if (propertyInfo.PropertyType == typeof(System.Boolean))
+                        {
+                            var value = Convert.ToBoolean(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else if (propertyInfo.PropertyType == typeof(System.Double))
+                        {
+                            var value = Convert.ToDouble(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else if (key == "LastUpdate" || key == "Date" || key == "FS_date")
+                        {
+                            var value = ChangeDateFormat(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else if (key == "First_trade_date")
+                        {
+                            var value = ChangeDateFormat1(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else if (key == "Year")
+                        {
+
+                            var value = ChangeYearFormat(String.Format("{0}", reader[key]));
+                            prop.SetValue(tmp, value);
+                        }
+                        else
+                        {
+                            var value = String.Format("{0}", reader[key]);
+                            prop.SetValue(tmp, value == "" ? null : value);
+                        }
                     }
                     item.Add(tmp);
                 }
@@ -262,6 +343,74 @@ namespace WebRole1.Helper
             cnn.Close();
 
             return item;
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // | Other    Function                                               |
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        private static string ChangeYearFormat(string year)
+        {
+            int new_year = Convert.ToInt32(year) + 543;
+            return new_year.ToString().Substring(2);
+        }
+        private static string ChangeDateFormat(string date)
+        {
+            var part = date.Split(' ');
+            var parts = part[0].Split('/');
+            int mm = Convert.ToInt32(parts[0]); ;
+            int dd = Convert.ToInt32(parts[1]);
+            int yy = Convert.ToInt32(parts[2]) + 543;
+
+            return $"{dd}/{mm}/{yy}";
+        }
+        private static string ChangeDateFormat1(string date)
+        {
+            var part = date.Split(' ');
+            var parts = part[0].Split('/');
+            int m = Convert.ToInt32(parts[0]);
+            string mm = "";
+            switch (m)
+            {
+                case 1:
+                    mm = "ม.ค.";
+                    break;
+                case 2:
+                    mm = "ก.พ.";
+                    break;
+                case 3:
+                    mm = "มี.ค.";
+                    break;
+                case 4:
+                    mm = "เม.ย.";
+                    break;
+                case 5:
+                    mm = "พ.ค.";
+                    break;
+                case 6:
+                    mm = "มิ.ย.";
+                    break;
+                case 7:
+                    mm = "ก.ค.";
+                    break;
+                case 8:
+                    mm = "ส.ค.";
+                    break;
+                case 9:
+                    mm = "ก.ย.";
+                    break;
+                case 10:
+                    mm = "ต.ค.";
+                    break;
+                case 11:
+                    mm = "พ.ย.";
+                    break;
+                default:
+                    mm = "ธ.ค";
+                    break;
+            }
+            int dd = Convert.ToInt32(parts[1]);
+            int yy = Convert.ToInt32(parts[2]) + 543;
+
+            return $"{dd} {mm} {yy}";
         }
     }
 }
