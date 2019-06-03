@@ -272,6 +272,7 @@ D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\bin\zh-Han
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\bin\zh-Hant\Microsoft.Data.OData.resources.dll
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\bin\zh-Hant\Microsoft.Data.Services.Client.resources.dll
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\bin\zh-Hant\System.Spatial.resources.dll
+D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Scripts\jquery-3.3.1.js
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Areas\HelpPage\HelpPage.css
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Areas\HelpPage\Views\Help\Api.cshtml
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml
@@ -311,7 +312,6 @@ D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\fonts\glyp
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Global.asax
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Scripts\bootstrap.js
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Scripts\bootstrap.min.js
-D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Scripts\jquery-3.3.1.js
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Scripts\jquery-3.3.1.min.js
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Scripts\jquery-3.3.1.min.map
 D:\Code\FindStock-api\FindStockAzureCloudService\obj\Release\WebRole1\Scripts\jquery-3.3.1.slim.js

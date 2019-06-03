@@ -145,37 +145,47 @@ namespace WebRole1.Helper
                         var key = propertyInfo.Name;
                         var prop = tmp.GetType().GetProperty(key);
                         if (key != "StockDividend" && key != "GrowthStock" && key != "Finance" && key != "HistoryFinanceStat")
+                        {
+                            Console.WriteLine($"{key} {String.Format("{0}", reader[key])}");
+                            var data = String.Format("{0}", reader[key]) == "" ? null : String.Format("{0}", reader[key]);
                             if (propertyInfo.PropertyType == typeof(System.Boolean))
                             {
-                                var value = Convert.ToBoolean(String.Format("{0}", reader[key]));
+                                var value = Convert.ToBoolean(data);
                                 prop.SetValue(tmp, value);
                             }
                             else if (propertyInfo.PropertyType == typeof(System.Double))
                             {
-                                var value = Convert.ToDouble(String.Format("{0}", reader[key]));
+                                double value = 0;
+                                if (data != null)
+                                    value = Convert.ToDouble(data);
                                 prop.SetValue(tmp, value);
                             }
                             else if (key == "LastUpdate" || key == "Date" || key == "FS_date")
                             {
-                                var value = ChangeDateFormat(String.Format("{0}", reader[key]));
+                                string value = null;
+                                if (data != null)
+                                    value = ChangeDateFormat(data);
                                 prop.SetValue(tmp, value);
                             }
                             else if (key == "First_trade_date")
                             {
-                                var value = ChangeDateFormat1(String.Format("{0}", reader[key]));
+                                string value = null;
+                                if (data != null)
+                                    value = ChangeDateFormat1(data);
                                 prop.SetValue(tmp, value);
                             }
                             else if (key == "Year")
                             {
-
-                                var value = ChangeYearFormat(String.Format("{0}", reader[key]));
+                                string value = null;
+                                if (data != null)
+                                    value = ChangeYearFormat(data);
                                 prop.SetValue(tmp, value);
                             }
                             else
                             {
-                                var value = String.Format("{0}", reader[key]);
-                                prop.SetValue(tmp, value == "" ? null : value);
+                                prop.SetValue(tmp, data);
                             }
+                        }
                     }
                     //--- Get growth_stock table
                     sql = $"SELECT * FROM dbo.growth_stock WHERE Symbol = '{tmp.Symbol}'";
@@ -192,16 +202,22 @@ namespace WebRole1.Helper
                     if (single)
                     {
                         //--- Get finance_info_yearly table
-                        sql = $"SELECT * FROM dbo.finance_info_yearly WHERE Symbol = '{tmp.Symbol}' AND Date >= '{newDt.ToString("yyyy-MM-dd HH:mm:ss")}'";
+                        sql = $"SELECT * FROM dbo.finance_info_yearly WHERE Symbol = '{tmp.Symbol}' AND Date >= '{newDt.ToString("yyyy-MM-dd HH:mm:ss")}' ORDER BY Date";
                         finance.FinanceInfoYearly = SeleteArrayDB<FinanceInfo>(sql);
                         //--- Get finance_stat_yearly table
-                        sql = $"SELECT * FROM dbo.finance_stat_yearly WHERE Symbol = '{tmp.Symbol}' AND Date >= '{newDt.ToString("yyyy-MM-dd HH:mm:ss")}'";
+                        sql = $"SELECT * FROM dbo.finance_stat_yearly WHERE Symbol = '{tmp.Symbol}' AND Date >= '{newDt.ToString("yyyy-MM-dd HH:mm:ss")}' ORDER BY Date";
                         finance.FinanceStatYearly = SeleteArrayDB<FinanceStat>(sql);
                         //--- Get finance_info_quarter table
                         sql = $"SELECT * FROM dbo.finance_info_quarter WHERE Symbol = '{tmp.Symbol}' AND Date IN (SELECT max(Date) FROM dbo.finance_info_quarter WHERE Symbol = '{tmp.Symbol}')";
                         finance.FinanceInfoQuarter = SeleteDB<FinanceInfo>(sql);
                         //--- Get finance_stat_daily history table
-                        sql = $"SELECT * FROM dbo.finance_stat_daily WHERE Symbol = '{tmp.Symbol}' AND Date >= '{dt.ToString("yyyy-MM-dd HH:mm:ss")}' ORDER BY Date DESC";
+                        sql = $"SELECT * FROM dbo.finance_stat_daily WHERE Symbol = '{tmp.Symbol}' AND Date >= '{dt.ToString("yyyy-MM-dd HH:mm:ss")}' ORDER BY Date";
+                        tmp.HistoryFinanceStat = SeleteArrayDB<FinanceStat>(sql);
+                    }
+                    else
+                    {
+                        //--- Get finance_stat_daily history table
+                        sql = $"SELECT TOP (2) * FROM dbo.finance_stat_daily WHERE Symbol = '{tmp.Symbol}' AND Date >= '{dt.ToString("yyyy-MM-dd HH:mm:ss")}' ORDER BY Date DESC";
                         tmp.HistoryFinanceStat = SeleteArrayDB<FinanceStat>(sql);
                     }
 
@@ -242,36 +258,47 @@ namespace WebRole1.Helper
                     {
                         var key = propertyInfo.Name;
                         var prop = tmp.GetType().GetProperty(key);
-                        if (propertyInfo.PropertyType == typeof(System.Boolean))
+                        if (key != "StockDividend" && key != "GrowthStock" && key != "Finance" && key != "HistoryFinanceStat")
                         {
-                            var value = Convert.ToBoolean(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else if (propertyInfo.PropertyType == typeof(System.Double))
-                        {
-                            var value = Convert.ToDouble(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else if (key == "LastUpdate" || key == "Date" || key == "FS_date")
-                        {
-                            var value = ChangeDateFormat(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else if (key == "First_trade_date")
-                        {
-                            var value = ChangeDateFormat1(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else if (key == "Year")
-                        {
-
-                            var value = ChangeYearFormat(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else
-                        {
-                            var value = String.Format("{0}", reader[key]);
-                            prop.SetValue(tmp, value == "" ? null : value);
+                            Console.WriteLine($"{key} {String.Format("{0}", reader[key])}");
+                            var data = String.Format("{0}", reader[key]) == "" ? null : String.Format("{0}", reader[key]);
+                            if (propertyInfo.PropertyType == typeof(System.Boolean))
+                            {
+                                var value = Convert.ToBoolean(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (propertyInfo.PropertyType == typeof(System.Double))
+                            {
+                                double value = 0;
+                                if (data != null)
+                                    value = Convert.ToDouble(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (key == "LastUpdate" || key == "Date" || key == "FS_date")
+                            {
+                                string value = null;
+                                if (data != null)
+                                    value = ChangeDateFormat(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (key == "First_trade_date")
+                            {
+                                string value = null;
+                                if (data != null)
+                                    value = ChangeDateFormat1(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (key == "Year")
+                            {
+                                string value = null;
+                                if (data != null)
+                                    value = ChangeYearFormat(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else
+                            {
+                                prop.SetValue(tmp, data);
+                            }
                         }
                     }
                     item = tmp;
@@ -303,36 +330,47 @@ namespace WebRole1.Helper
                     {
                         var key = propertyInfo.Name;
                         var prop = tmp.GetType().GetProperty(key);
-                        if (propertyInfo.PropertyType == typeof(System.Boolean))
+                        if (key != "StockDividend" && key != "GrowthStock" && key != "Finance" && key != "HistoryFinanceStat")
                         {
-                            var value = Convert.ToBoolean(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else if (propertyInfo.PropertyType == typeof(System.Double))
-                        {
-                            var value = Convert.ToDouble(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else if (key == "LastUpdate" || key == "Date" || key == "FS_date")
-                        {
-                            var value = ChangeDateFormat(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else if (key == "First_trade_date")
-                        {
-                            var value = ChangeDateFormat1(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else if (key == "Year")
-                        {
-
-                            var value = ChangeYearFormat(String.Format("{0}", reader[key]));
-                            prop.SetValue(tmp, value);
-                        }
-                        else
-                        {
-                            var value = String.Format("{0}", reader[key]);
-                            prop.SetValue(tmp, value == "" ? null : value);
+                            Console.WriteLine($"{key} {String.Format("{0}", reader[key])}");
+                            var data = String.Format("{0}", reader[key]) == "" ? null : String.Format("{0}", reader[key]);
+                            if (propertyInfo.PropertyType == typeof(System.Boolean))
+                            {
+                                var value = Convert.ToBoolean(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (propertyInfo.PropertyType == typeof(System.Double))
+                            {
+                                double value = 0;
+                                if (data != null)
+                                    value = Convert.ToDouble(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (key == "LastUpdate" || key == "Date" || key == "FS_date")
+                            {
+                                string value = null;
+                                if (data != null)
+                                    value = ChangeDateFormat(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (key == "First_trade_date")
+                            {
+                                string value = null;
+                                if (data != null)
+                                    value = ChangeDateFormat1(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else if (key == "Year")
+                            {
+                                string value = null;
+                                if (data != null)
+                                    value = ChangeYearFormat(data);
+                                prop.SetValue(tmp, value);
+                            }
+                            else
+                            {
+                                prop.SetValue(tmp, data);
+                            }
                         }
                     }
                     item.Add(tmp);
