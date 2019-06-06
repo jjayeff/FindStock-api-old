@@ -13,6 +13,21 @@ namespace WebRole1.Controllers
     public class StockController : ApiController
     {
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // | Model                                                           |
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        public class Visitor
+        {
+            public string IP_Address { get; set; }
+            public string Continent { get; set; }
+            public string Country { get; set; }
+            public string Region { get; set; }
+            public string Org { get; set; }
+            public string Latitude { get; set; }
+            public string Longitude { get; set; }
+            public string Path_To { get; set; }
+            public string Path_From { get; set; }
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         // | Config                                                          |
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         private static string DatabaseServer = ConfigurationManager.AppSettings["DatabaseServer"];
@@ -53,6 +68,22 @@ namespace WebRole1.Controllers
             public string Score { get; set; }
             public string LastUpdate { get; set; }
         }
+        public class StocksSector
+        {
+
+            public StocksSector() { }
+
+            // Properties.
+            public string Symbol { get; set; }
+            public string Industry { get; set; }
+            public string Sector { get; set; }
+            public double Lastprice { get; set; }
+            public double PE { get; set; }
+            public double PBV { get; set; }
+            public double Dvd_Yield { get; set; }
+            public double Market_cap { get; set; }
+            public string LastUpdate { get; set; }
+        }
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
         // | GET api/stock                                                   |
         // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -86,6 +117,39 @@ namespace WebRole1.Controllers
             string sql = $"SELECT * FROM dbo.stock WHERE Symbol = '{symbol}'";
 
             return getDB.GetStock(sql, true);
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // | POST api/visitor                                              |
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        [HttpPost]
+        [Route("api/visitor")]
+        public dynamic PostFundamental([FromBody]Visitor value)
+        {
+            var insertDB = new GetDatebaseHelper();
+
+            return insertDB.VisitorDatabase(value, "visitor");
+        }
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        // | GET api/sector                                                  |
+        // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+        [HttpGet]
+        [Route("api/sector/{sector}")]
+        public dynamic GetStocksBySector(string sector)
+        {
+            var getDB = new GetDatebaseHelper();
+            string sql = $"SELECT stock.Symbol, " +
+            "stock.Industry, " +
+            "stock.Sector, " +
+            "finance_stat_daily.Lastprice, " +
+            "finance_stat_daily.PE, " +
+            "finance_stat_daily.PBV, " +
+            "finance_stat_daily.Dvd_Yield, " +
+            "stock.Market_cap, " +
+            "stock.LastUpdate " +
+            "FROM stock INNER JOIN finance_stat_daily ON stock.Symbol = finance_stat_daily.Symbol " +
+            $"WHERE stock.Sector = '{sector}' AND finance_stat_daily.LastUpdate = (SELECT MAX(LastUpdate) FROM finance_stat_daily) ";
+
+            return getDB.GetDatabase<StocksSector>(sql);
         }
     }
 }

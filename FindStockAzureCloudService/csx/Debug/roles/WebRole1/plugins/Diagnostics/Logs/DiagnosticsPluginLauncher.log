@@ -1,17 +1,17 @@
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Emulator config file set to D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] DiagnosticsStoreRootPath set to: C:\Users\ekkaw\AppData\Local\dftmp\Resources\c5d4c4fb-b2ba-4a63-bcf5-87af84c6d32f
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Loading config file: D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Config file to read: D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Checking VM Type
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Emulator config file set to D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Extension set to Emulator Mode
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Reading XML configuration file
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Bypassing private config decryption
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Stopping the running plugin, if any
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] No DiagnosticsPlugin is running.
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Killing any DiagnosticsPlugin that might remain.
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Killing any MonAgentHost that might remain.
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Diagnostics plugin stopped successfully
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:38:17] Resetting DiagnosticPlugin
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:39:27] DiagnosticsPlugin launched successfully with new configuration
-DiagnosticsPluginLauncher.exe Information: 0 : [3/6/2562 0:39:27] DiagnosticPlugin exited with code 0
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] Emulator config file set to D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] DiagnosticsStoreRootPath set to: C:\Users\ekkaw\AppData\Local\dftmp\Resources\71543d88-fa1f-4819-aa19-ff3dab8dd8fc
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] Loading config file: D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] Config file to read: D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] Checking VM Type
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] Emulator config file set to D:\Code\FindStock-api\FindStockAzureCloudService\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] Extension set to Emulator Mode
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] Reading XML configuration file
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] Bypassing private config decryption
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:47] Stopping the running plugin, if any
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:48] No DiagnosticsPlugin is running.
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:48] Killing any DiagnosticsPlugin that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:48] Killing any MonAgentHost that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:48] Diagnostics plugin stopped successfully
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:10:48] Resetting DiagnosticPlugin
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:11:59] DiagnosticsPlugin launched successfully with new configuration
+DiagnosticsPluginLauncher.exe Information: 0 : [5/6/2562 7:11:59] DiagnosticPlugin exited with code 0
